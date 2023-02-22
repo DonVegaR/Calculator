@@ -51,19 +51,26 @@ function calculate() {
     let screen = document.getElementById('screen')
     let screenValue = screen.value
 
+    //create an array of element separing the numbers from its operators
     let operations = screenValue.split(/([\+\-\*\/])/)
+    //getting the first number to evaluate in index 0 of operation arr
     let result = Number(operations[0])
-    console.log(result)
 
     for (let i = 1; i < operations.length; i += 2){
-        let opStr = operations[i]
-        console.log(opStr)
-        let numStr = operations[i + 1]
-        let num = Number(numStr)
+        let opStr = operations[i]  // selecting the operator
+        let numStr = operations[i + 1] //selectin our 2 number
+        let num = Number(numStr) //passin to a integer
 
         result = operate(opStr, result, num)
     }
 
-    screen.value = result
+    if (result % 1 === 0) {
+        // If result is an integer
+        screen.value = Math.floor(result).toString(); // Display whole number without decimal places
+    } else {
+        // If result is a decimal
+        screen.value = result.toFixed(2).toString(); // Display with two decimal places
+    }
+    
 }
 
