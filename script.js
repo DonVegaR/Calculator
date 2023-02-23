@@ -5,7 +5,10 @@ let operator
 let result 
 
 function addToScreen(char) {
-    display.value += char
+    if (/[0-9+\-*/.]/.test(char)){
+        display.value += char
+    }
+    
 }
 
 function deleteChar() {
@@ -74,3 +77,15 @@ function calculate() {
     
 }
 
+
+window.addEventListener('keydown', (event)=>{
+    addToScreen(event.key)
+    if(event.key === 'Backspace'){
+        deleteChar()
+    } else if (event.key === 'Enter'){
+        calculate()
+    } else if (event.key === 'Escape'){
+        clearScreen()
+    }
+
+})
